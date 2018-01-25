@@ -60,7 +60,9 @@ function Player(name, x, y, xl, yl, c) {
 		rect(this.x, this.y, this.xl, this.yl);
 
 		if (players[activePlayer].name == this.name) {
-			traingle
+			fill(255);
+			stroke(255);	
+			triangle(this.x + (this.xl / 2) - 5, this.y - 10, this.x + (this.xl / 2) + 5, this.y - 10, this.x + (this.xl / 2), this.y - 5,)
 		}
 	}
 
