@@ -22,6 +22,9 @@ function setup() {
 	//Flat Rectangle Player
 	FlatRectagle = new Player('FlatRectagle', 0, 50, 80, 10, [0, 200, 100]);
 	players.push(FlatRectagle);
+
+	Floor = new Player('Floor', 0, height - 100, width, height - 1, [255, 255, 255]);
+	platforms.push(Floor);
 }
 
 function draw() {
@@ -32,7 +35,9 @@ function draw() {
 
 	//Render Players
 	for (var i = 0; i < players.length; i++) {
+		players[i].gravity();
 		players[i].collision(players);
+		players[i].collision(platforms);
 		players[i].render();
 	}
 
@@ -68,7 +73,7 @@ function Player(name, x, y, xl, yl, c) {
 
 	this.move = function(d) {
 		this.x += d[0];
-		this.y += d[1];
+		this.y += d[1] + this.grav;
 	}
 
 	this.collision = function(array) {
@@ -81,9 +86,22 @@ function Player(name, x, y, xl, yl, c) {
 						players[activePlayer].x -= dir[0];
 						players[activePlayer].y -= dir[1];
 						dir = [0, 0];
+
+						if (players[activePlayer].name == this.name) {
+							this.grav = 0;
+						}
 					}
 				}
 			}
+		}
+	}
+
+	this.gravity = function() {
+		if (players[activePlayer].name == this.name) {
+			this.grav += 0.1;
+		}
+		else {
+			this.grav = 0;
 		}
 	}
 }
