@@ -8,20 +8,13 @@ function setup() {
 	createCanvas(600, 400);
 
 	//Cube Player
-	Cube = new Player('Cube', 0, 0, 10, 10, [255, 0, 100]);
-	players.push(Cube);
+	players.push(...[
+		new Player('Cube', 0, 0, 10, 10, [255, 0, 100]),
+		new Player('Rectangle', 20, 0, 10, 20, [200, 200, 0]),
+		new Player('BigCube', 40, 0, 40, 40, [0, 0, 255]),
+		new Player('FlatRectagle', 0, 50, 80, 10, [0, 200, 100])
+	]);
 
-	//Rect Player
-	Rectangle = new Player('Rectangle', 20, 0, 10, 20, [200, 200, 0]);
-	players.push(Rectangle);
-
-	//Big Cube Player
-	BigCube = new Player('BigCube', 40, 0, 40, 40, [0, 0, 255]);
-	players.push(BigCube);
-
-	//Flat Rectangle Player
-	FlatRectagle = new Player('FlatRectagle', 0, 50, 80, 10, [0, 200, 100]);
-	players.push(FlatRectagle);
 }
 
 function draw() {
@@ -61,7 +54,7 @@ function Player(name, x, y, xl, yl, c) {
 
 		if (players[activePlayer].name == this.name) {
 			fill(255);
-			stroke(255);	
+			stroke(255);
 			triangle(this.x + (this.xl / 2) - 5, this.y - 10, this.x + (this.xl / 2) + 5, this.y - 10, this.x + (this.xl / 2), this.y - 5,)
 		}
 	}
@@ -74,9 +67,9 @@ function Player(name, x, y, xl, yl, c) {
 	this.collision = function(array) {
 		for (var i = 0; i < array.length; i++) {
 			if (array[i].name != this.name) {
-				if ((this.x >= array[i].x && this.x <= array[i].x + array[i].xl) || 
+				if ((this.x >= array[i].x && this.x <= array[i].x + array[i].xl) ||
 					(this.x + this.xl >= array[i].x && this.x + this.xl <= array[i].x + array[i].xl)) {
-					if ((this.y >= array[i].y && this.y <= array[i].y + array[i].yl) || 
+					if ((this.y >= array[i].y && this.y <= array[i].y + array[i].yl) ||
 						(this.y + this.yl >= array[i].y && this.y + this.yl <= array[i].y + array[i].yl)) {
 						players[activePlayer].x -= dir[0];
 						players[activePlayer].y -= dir[1];
