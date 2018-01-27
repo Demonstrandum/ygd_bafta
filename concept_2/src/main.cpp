@@ -1,25 +1,24 @@
-#include "includes.hpp"
-#include "drawing.hpp"
+#include "../lib/graphics/graphics"
 #include <iostream>
 
-static int show_window(void *window)
+void Game::setup()
 {
-    std::cout << "Show being called" << std::endl;
-    ((Window *)window)->show();
-    return 0;
+    background(Colour(255, 100, 255));
+}
+
+void Game::draw()
+{
+    Colour fill(255, 255, 100);
+
+    Rectangle rect(Point(3, 3), 50, 100, fill);
+    render(&rect);
+    // OR: `rect.render(this->renderer);`
 }
 
 int main(int argc, char **argv)
 {
-    std::cout << "Game starting." << std::endl;
-    Window *window = new Window(640, 480);
-
-    int thread_succ;
-    SDL_Thread *thread;
-    thread = SDL_CreateThread(show_window, "show_window", (void *)window);
-    std::cout << "Thread just started" << std::endl;
-    SDL_WaitThread(thread, &thread_succ);
-    std::cout << "Thread waiting" << std::endl;
+    Game *game = new Game(640, 480, 144); // WIDTH, HEIGHT, FPS
+    game->start();
 
     return 0;
 }

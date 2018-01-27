@@ -5,7 +5,7 @@ GLOB   = /usr/local/bin
 
 all:
 	@echo "Compiling $(TARGET).cr..."
-	$(COMP) $(FLAGS) ./src/*.cpp -o $(TARGET)
+	$(COMP) $(FLAGS) ./lib/*/*.cpp ./src/*.cpp -o $(TARGET)
 
 install:
 	@echo "Copying $(TARGET) to $(GLOB)..."

@@ -1,6 +1,12 @@
 #include "drawing.hpp"
-#include "timer.hpp"
-#include <iostream>
+
+Colour::Colour(short r, short g, short b, short a)
+{
+    this->r = r;
+    this->g = g;
+    this->b = b;
+    this->a = a;
+}
 
 Window::Window(unsigned short w, unsigned short h, unsigned fps)
 {
@@ -9,7 +15,7 @@ Window::Window(unsigned short w, unsigned short h, unsigned fps)
     this->frame_rate = fps;
 }
 
-void Window::show()
+void Window::start()
 {
     this->window = NULL;
 	this->base_surface = NULL;
@@ -41,7 +47,7 @@ void Window::show()
 
     			SDL_UpdateWindowSurface(window);
                 // regulate fps
-                if( timer.get_ticks() < 1000 / this->frame_rate) {
+                if ((unsigned)(timer.get_ticks()) < 1000 / this->frame_rate) {
                     SDL_Delay((1000 / this->frame_rate) - timer.get_ticks());
                 }
             } while (running);
@@ -50,16 +56,16 @@ void Window::show()
 	}
 }
 
-SDL_Window *Window::window_ptr() { return &*(this->window); }
-SDL_Surface *Window::surface_ptr() { return &*(this->base_surface); }
+SDL_Window *Window::window_ptr() { return this->window; }
+SDL_Surface *Window::surface_ptr() { return this->base_surface; }
+
+void Window::hide()
+{
+    SDL_DestroyWindow(this->window);
+}
 
 Window::~Window()
 {
     this->hide();
     SDL_Quit();
-}
-
-void Window::hide()
-{
-    SDL_DestroyWindow(this->window);
 }
