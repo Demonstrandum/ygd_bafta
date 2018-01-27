@@ -11,7 +11,7 @@ public:
 class Window {
 public:
     Window(unsigned short w, unsigned short h, unsigned fps = 60);
-    ~Window();
+    virtual ~Window();
 
     void start();
     void hide();

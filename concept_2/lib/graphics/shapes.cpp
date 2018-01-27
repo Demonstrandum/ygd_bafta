@@ -8,7 +8,7 @@ Rectangle::Rectangle(const Point &o, int w, int h, const Colour &col) : origin(o
     this->height = h;
 }
 
-void Rectangle::render(SDL_Renderer *renderer) {
+Rectangle &Rectangle::render(SDL_Renderer *renderer) {
     SDL_SetRenderDrawColor(renderer, colour.r, colour.g, colour.b, colour.a);
 
     for (int x = this->origin.x; x <= this->width; x++) {
@@ -16,4 +16,5 @@ void Rectangle::render(SDL_Renderer *renderer) {
             SDL_RenderDrawPoint(renderer, x, y);
         }
     }
+    return *this;
 }

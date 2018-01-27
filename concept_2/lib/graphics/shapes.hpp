@@ -13,5 +13,5 @@ private:
     Colour colour;
 public:
     Rectangle(const Point &o, int w, int h, const Colour &col);
-    void render(SDL_Renderer *renderer);
+    Rectangle &render(SDL_Renderer *renderer);
 };

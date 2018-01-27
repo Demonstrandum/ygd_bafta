@@ -3,7 +3,7 @@
 class Game : public Window {
 public:
     Game(unsigned short, unsigned short, unsigned fps = 60);
-    ~Game();
+    virtual ~Game();
     void start();
     virtual void setup();
     virtual void draw();
@@ -11,7 +11,7 @@ public:
     void background(Colour);
 
     template<class Graphic>  // Must define here, can't define in seperate file
-    void render(Graphic *item) { item->render(this->renderer); }
+    Graphic &render(Graphic *item) { return item->render(this->renderer); }
 private:
     unsigned short width, height;
     unsigned frame_rate;
