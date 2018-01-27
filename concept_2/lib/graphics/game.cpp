@@ -24,7 +24,7 @@ void Game::start()
 		std::cout << "SDL could not initialize! SDL_Error: "
         << SDL_GetError() << std::endl;
 	} else {  // Just make the window
-		//window = SDL_CreateWindow("SDL TEST", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_SHOWN);
+	    //window = SDL_CreateWindow("SDL TEST", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_SHOWN);
         SDL_Init(SDL_INIT_VIDEO);
         SDL_CreateWindowAndRenderer(
             this->width, this->height, 0,
