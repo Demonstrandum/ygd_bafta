@@ -1,6 +1,6 @@
 COMP   = g++
 FLAGS  = -Wall -Wpedantic -lSDL2 -lpthread
-TARGET = bin/game
+TARGET = ./bin/game
 GLOB   = /usr/local/bin
 
 all:
