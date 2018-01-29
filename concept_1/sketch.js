@@ -7,13 +7,17 @@ var dir = [0, 0];
 function setup() {
 	createCanvas(600, 400);
 
-	//Cube Player
 	players.push(...[
 		new Player('Cube', 0, 0, 10, 10, [255, 0, 100]),
 		new Player('Rectangle', 20, 0, 10, 20, [200, 200, 0]),
 		new Player('BigCube', 40, 0, 40, 40, [0, 0, 255]),
 		new Player('FlatRectagle', 0, 50, 80, 10, [0, 200, 100])
 	]);
+
+	platforms.push(...[
+		new Player('Floor', 0, height - 100, width, 99, [255, 255, 255])
+	]);
+
 
 }
 
@@ -25,7 +29,9 @@ function draw() {
 
 	//Render Players
 	for (var i = 0; i < players.length; i++) {
+		players[i].gravity();
 		players[i].collision(players);
+		players[i].collision(platforms);
 		players[i].render();
 	}
 
@@ -37,6 +43,7 @@ function draw() {
 
 function Player(name, x, y, xl, yl, c) {
 	this.name = name;
+	this.grav = 0;
 
 	this.x = x;
 	this.y = y;
@@ -61,7 +68,7 @@ function Player(name, x, y, xl, yl, c) {
 
 	this.move = function(d) {
 		this.x += d[0];
-		this.y += d[1];
+		this.y += d[1] + this.grav;
 	}
 
 	this.collision = function(array) {
@@ -71,12 +78,23 @@ function Player(name, x, y, xl, yl, c) {
 					(this.x + this.xl >= array[i].x && this.x + this.xl <= array[i].x + array[i].xl)) {
 					if ((this.y >= array[i].y && this.y <= array[i].y + array[i].yl) ||
 						(this.y + this.yl >= array[i].y && this.y + this.yl <= array[i].y + array[i].yl)) {
-						players[activePlayer].x -= dir[0];
-						players[activePlayer].y -= dir[1];
+						players[activePlayer].x -= 2 * dir[0];
+						players[activePlayer].y -= 2 * dir[1];
 						dir = [0, 0];
+
+						this.grav = 0;
 					}
 				}
 			}
+		}
+	}
+
+	this.gravity = function() {
+		if (players[activePlayer].name == this.name) {
+			this.grav += 0.1;
+		}
+		else {
+			this.grav = 0;
 		}
 	}
 }
@@ -86,10 +104,8 @@ function keyPressed() {
 		dir = [1, 0];
 	else if (keyCode == LEFT_ARROW)
 		dir = [-1, 0];
-	else if (keyCode == UP_ARROW)
-		dir = [0, -1];
-	else if (keyCode == DOWN_ARROW)
-		dir = [0, 1];
+	if (keyCode == UP_ARROW)
+		players[activePlayer].grav = -2;
 
 
 	if (keyCode == SHIFT) {
