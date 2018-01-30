@@ -8,6 +8,7 @@ namespace Graphics {
         void start();
         virtual void setup();
         virtual void draw();
+        virtual void on_resize(SDL_Event event);
 
         void background(Colour);
 

@@ -14,6 +14,15 @@ namespace Graphics {
         SDL_RenderClear(this->renderer);
     }
 
+    void Game::on_resize(SDL_Event event)
+    {
+        /*SDL_Log("Window %d resized to %dx%d",
+                event.window.windowID, event.window.data1,
+                event.window.data2);*/
+        width  = event.window.data1;
+        height = event.window.data2;
+    }
+
     void Game::start()
     {
         this->window = NULL;
@@ -46,8 +55,22 @@ namespace Graphics {
                 do {  // Game loop
                     timer.start();
                     //Events
-                    while(SDL_PollEvent(&event)) {
-                        if( event.type == SDL_QUIT ) running = false;
+                    while (SDL_PollEvent(&event)) {
+                        if (event.type == SDL_QUIT) running = false;
+                        if (event.type == SDL_WINDOWEVENT) {
+                            switch (event.window.event) {
+                            case SDL_WINDOWEVENT_RESIZED:
+                                this->on_resize(event);
+                                break;
+                            case SDL_WINDOWEVENT_SIZE_CHANGED:
+                                this->on_resize(event);
+                                break;
+                            default:
+                                /*SDL_Log("Window %d got unknown event %d",
+                                        event.window.windowID, event.window.event);*/
+                                break;
+                            }
+                        }
                     }
 
                     this->draw();
