@@ -1,7 +1,5 @@
-#include <graphics/graphics.hpp>
-#include <iostream>
+#include "links.hpp"
 
-using namespace Graphics;
 
 int main(int argc, char **argv)
 {
@@ -14,17 +12,20 @@ int main(int argc, char **argv)
 Point coord;
 std::vector<Point> points;
 
-float spin = 0;
+Player cube(10, 10, 20, 20);
+
+//float spin = 0;
 
 void Game::setup()
 {
-    coord = Point(width/2 - 25, height/2 - 25);
+    coord = Point(width/2, height/2);
 }
 
 void Game::draw()
 {
     background(Colour(255, 100, 255));
-
+    render(&cube);
+/*
     Colour yellow(255, 255, 20);
     fill(yellow);
     stroke(Colour(255, 255, 255));
@@ -33,14 +34,21 @@ void Game::draw()
         coord.y = 200 * sin(angle + spin) + height/2 - 0.5;
         coord.x = width/TAU * angle; // Full wavelength
 
-        Rectangle rect(coord, 1, 1);
+        Rectangle rect(coord, 1, 1,);
         render(&rect);
+        // OR: `rect.render(this->renderer);`
     }
 
-    spin += 0.01;
+    spin += 0.03;
     if (spin >= TAU) spin = 0;
 
-    // OR: `rect.render(this->renderer);`
+     * LUKE, Please see if you can write some sort of a
+     * physics engine or something on this, basic collision
+     * and/or gravity.
+
 
     std::cout << "\r(" << coord.x << ", " << coord.y << ")";
+    */
+
+
 }

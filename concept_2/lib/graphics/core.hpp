@@ -1,3 +1,9 @@
+#include <vector>
+#include <chrono>
+#include <cmath>
+#include <algorithm>
+#include <iostream>
+
 #ifdef __linux__
     #include <SDL2/SDL.h>
 #elif __APPLE__
@@ -11,8 +17,3 @@
 #else
     #error "I don't know what OS this is."
 #endif
-
-#include <vector>
-#include <chrono>
-#include <cmath>
-#include <algorithm>

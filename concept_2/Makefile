@@ -1,5 +1,5 @@
 COMP   = g++
-FLAGS  = -Wall -Wpedantic -lSDL2 -Ilib
+FLAGS  = -Wall -Wpedantic -lSDL2 -Ilib -O3
 TARGET = ./bin/game
 GLOB   = /usr/local/bin
 

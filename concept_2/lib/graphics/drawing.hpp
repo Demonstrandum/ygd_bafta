@@ -30,6 +30,7 @@ namespace Graphics {
         SDL_Window *window_ptr();
         SDL_Surface *surface_ptr();
     private:
+        char *title;
         unsigned short width, height;
         unsigned frame_rate;
         SDL_Window *window;

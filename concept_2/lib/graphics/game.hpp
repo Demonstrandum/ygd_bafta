@@ -15,6 +15,7 @@ namespace Graphics {
         template<class Graphic>  // Must define here, can't define in seperate file
         Graphic &render(Graphic *item) { return item->render(this->renderer); }
     private:
+        char *title = "";
         unsigned short width, height;
         unsigned frame_rate;
         SDL_Window *window;

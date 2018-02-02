@@ -1,0 +1,9 @@
+[cxx]
+  cxxpp = /usr/bin/g++
+  cxx   = /usr/bin/g++
+  ld    = /usr/bin/g++
+  ar    = /usr/bin/ar
+
+  linker_platform = GNU
+  cxxflags = -Wall -Wpedantic -lSDL2 -I./concept_2/lib -O3
+
