@@ -1,5 +1,7 @@
 #include <graphics/graphics.hpp>
 #include "entities/Player.hpp"
+#include "entities/Obstacle.hpp"
+
 using namespace Graphics;
 
 int main(int argc, char **argv)
@@ -11,7 +13,8 @@ int main(int argc, char **argv)
 }
 
 std::vector<Player> players;
-Player wall;
+Obstacle wall;
+
 void Game::setup()
 {
     std::vector<std::string> names = {"Tom", "Phenelope", "Sam", "Luke"};
@@ -21,7 +24,7 @@ void Game::setup()
         x += 50;
     }
 
-    wall = Player("wall", Point(0, height - 30), width, 100);
+    wall = Obstacle("wall", Point(0, height - 30), width, 100);
 }
 
 
