@@ -1,5 +1,5 @@
 #include <graphics/graphics.hpp>
-#include "Player.hpp"
+#include "entities/Player.hpp"
 using namespace Graphics;
 
 int main(int argc, char **argv)
@@ -11,6 +11,7 @@ int main(int argc, char **argv)
 }
 
 std::vector<Player> players;
+Player wall;
 void Game::setup()
 {
     std::vector<std::string> names = {"Tom", "Phenelope", "Sam", "Luke"};
@@ -19,9 +20,10 @@ void Game::setup()
         players.push_back(Player(name, Point(x, 10), 30, 30));
         x += 50;
     }
+
+    wall = Player("wall", Point(0, height - 30), width, 100);
 }
 
-Player wall("wall", Point(0, 480 - 10), 640, 100);
 
 void Game::draw()
 {
@@ -29,11 +31,14 @@ void Game::draw()
     fill(Colour(52));
     stroke(Colour(255, 0, 255));
 
-    for (unsigned int i = 0; i < players.size(); i++) {
-        players[i].gravity(players[i].mass);
-        players[i].move();
-        players[i].collide(&wall);
-        render(&players[i]);
+    unsigned mass_jump = 0;
+    for (Player &player : players) {
+        player.gravity(player.mass + mass_jump);
+        mass_jump += 300;
+
+        player.move();
+        player.collide(&wall);
+        render(&player);
     }
 
     render(&wall);

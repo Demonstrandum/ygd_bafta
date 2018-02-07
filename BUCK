@@ -14,7 +14,8 @@ cxx_binary(
   ]),
   srcs = glob([
     'concept_2/src/*.cpp',
-    'concept_2/lib/**/*.cpp'
+    'concept_2/lib/**/*.cpp',
+    'concept_2/src/**/*.cpp'
   ]),
   deps = [
     ':SDL2',
