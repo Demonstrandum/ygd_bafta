@@ -9,7 +9,7 @@ namespace Graphics {
     class Colour {
     public:
         short r, g, b, a;
-        Colour(short r, short g, short b, short a=255);
+        Colour(short r, short g = -1, short b = -1, short a=255);
     };
 
     extern Colour filler;

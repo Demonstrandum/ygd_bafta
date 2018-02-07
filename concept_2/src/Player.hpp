@@ -1,11 +1,20 @@
+#include <graphics/graphics.hpp>
+using namespace Graphics;
+
 class Player {
+private:
+    float width, height;
+    std::string name;
+    bool isfalling = true;
+
 public:
-    int x, y, width, height;
-    Player(int x, int y, int w, int h)
-    {
-        this->x = x;
-        this->y = y;
-        this->width = w;
-        this->height = h;
-    }
+    Point origin;
+    std::vector<float> dir = {0, 0};
+    float mass = this->width * this->height;
+
+    Player(std::string, const Point &, float, float);
+    Player &render(SDL_Renderer *);
+    void gravity(float);
+    void move();
+    void collide(Player *);
 };

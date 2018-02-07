@@ -1,5 +1,6 @@
-#include "links.hpp"
-
+#include <graphics/graphics.hpp>
+#include "Player.hpp"
+using namespace Graphics;
 
 int main(int argc, char **argv)
 {
@@ -9,46 +10,31 @@ int main(int argc, char **argv)
     return 0;
 }
 
-Point coord;
-std::vector<Point> points;
-
-Player cube(10, 10, 20, 20);
-
-//float spin = 0;
-
+std::vector<Player> players;
 void Game::setup()
 {
-    coord = Point(width/2, height/2);
+    std::vector<std::string> names = {"Tom", "Phenelope", "Sam", "Luke"};
+    int x = 10;
+    for (std::string &name : names) {
+        players.push_back(Player(name, Point(x, 10), 30, 30));
+        x += 50;
+    }
 }
+
+Player wall("wall", Point(0, 480 - 10), 640, 100);
 
 void Game::draw()
 {
-    background(Colour(255, 100, 255));
-    render(&cube);
-/*
-    Colour yellow(255, 255, 20);
-    fill(yellow);
-    stroke(Colour(255, 255, 255));
+    background(Colour(255));
+    fill(Colour(52));
+    stroke(Colour(255, 0, 255));
 
-    for (float angle = 0; angle < TAU; angle += 0.01) {
-        coord.y = 200 * sin(angle + spin) + height/2 - 0.5;
-        coord.x = width/TAU * angle; // Full wavelength
-
-        Rectangle rect(coord, 1, 1,);
-        render(&rect);
-        // OR: `rect.render(this->renderer);`
+    for (unsigned int i = 0; i < players.size(); i++) {
+        players[i].gravity(players[i].mass);
+        players[i].move();
+        players[i].collide(&wall);
+        render(&players[i]);
     }
 
-    spin += 0.03;
-    if (spin >= TAU) spin = 0;
-
-     * LUKE, Please see if you can write some sort of a
-     * physics engine or something on this, basic collision
-     * and/or gravity.
-
-
-    std::cout << "\r(" << coord.x << ", " << coord.y << ")";
-    */
-
-
+    render(&wall);
 }

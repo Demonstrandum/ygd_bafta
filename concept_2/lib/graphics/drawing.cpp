@@ -3,10 +3,17 @@
 namespace Graphics {
     Colour::Colour(short r, short g, short b, short a)
     {
-        this->r = r;
-        this->g = g;
-        this->b = b;
-        this->a = a;
+        if (g < 0 || b < 0) {
+            this->r = r;
+            this->g = r;
+            this->b = r;
+            this->a = a;
+        } else {
+            this->r = r;
+            this->g = g;
+            this->b = b;
+            this->a = a;
+        }
     }
 
     Colour filler  = Colour(255, 255, 255);

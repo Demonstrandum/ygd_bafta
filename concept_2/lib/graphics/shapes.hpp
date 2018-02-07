@@ -13,6 +13,10 @@ namespace Graphics {
         Point origin;
         Colour   fill_colour;
         Colour stroke_colour;
+        int draw_mode;
+
+        void draw_fill(SDL_Renderer *);
+        void draw_stroke(SDL_Renderer *);
     public:
         Rectangle(
             const Point &o,
@@ -21,6 +25,7 @@ namespace Graphics {
             const Colour &col2 = stroker,
             int mode = Mode::FILL | Mode::STROKE
         );
+
         Rectangle &render(SDL_Renderer *renderer);
     };
 }

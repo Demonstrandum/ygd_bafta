@@ -1,6 +1,7 @@
 function Player(name, x, y, xl, yl, c) {
 	this.name = name;
 	this.grav = 0;
+	this.canjump = true;
 
 	this.x = x;
 	this.y = y;
@@ -19,7 +20,9 @@ function Player(name, x, y, xl, yl, c) {
 		if (players[activePlayer].name == this.name) {
 			fill(255);
 			stroke(255);
-			triangle(this.x + (this.xl / 2) - 5, this.y - 10, this.x + (this.xl / 2) + 5, this.y - 10, this.x + (this.xl / 2), this.y - 5,)
+			//Show Active Player
+			triangle(this.x + (this.xl / 2) - 5, this.y - 10,
+				this.x + (this.xl / 2) + 5, this.y - 10, this.x + (this.xl / 2), this.y - 5,)
 		}
 	}
 
@@ -35,12 +38,12 @@ function Player(name, x, y, xl, yl, c) {
 					(this.x + this.xl >= array[i].x && this.x + this.xl <= array[i].x + array[i].xl)) {
 					if ((this.y >= array[i].y && this.y <= array[i].y + array[i].yl) ||
 						(this.y + this.yl >= array[i].y && this.y + this.yl <= array[i].y + array[i].yl)) {
-						players[activePlayer].x += 2 * dir[0];
-						players[activePlayer].y += 10 * dir[1];
+						players[activePlayer].x += 0.5 * dir[0];
+						players[activePlayer].y += 2 * dir[1];
 
 						dir[1] = 0;
-
-						this.grav = 0;
+						this.canjump = true;
+						this.grav = (this.grav * -1) / 2;
 					}
 				}
 			}
