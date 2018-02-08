@@ -24,7 +24,7 @@ void Game::setup()
         x += 50;
     }
 
-    wall = Obstacle("wall", Point(0, height - 30), width, 100);
+    wall = Obstacle(Point(0, height - 30), width, 100);
 }
 
 
@@ -38,9 +38,9 @@ void Game::draw()
     for (Player &player : players) {
         player.gravity(player.mass + mass_jump);
         mass_jump += 300;
-
         player.move();
         player.collide(&wall);
+
         render(&player);
     }
 

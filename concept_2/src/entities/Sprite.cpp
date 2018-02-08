@@ -1,6 +1,6 @@
 #include "Sprite.hpp"
 
-Sprite::Sprite(std::string n, const Point &loc, float w, float h) : name(n), origin(loc), width(w), height(h) {}
+Sprite::Sprite(const Point &loc, float w, float h) : origin(loc), width(w), height(h) {}
 
 Sprite &Sprite::render(SDL_Renderer *renderer)
 {

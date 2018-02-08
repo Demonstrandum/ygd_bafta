@@ -1,7 +1,7 @@
 #include "Obstacle.hpp"
 
-Obstacle::Obstacle(std::string n, const Point &loc, float w, float h) : Sprite(n, loc, w, h)
-    , name(n), origin(loc)
+Obstacle::Obstacle(const Point &loc, float w, float h) : Sprite(loc, w, h)
+    , origin(loc)
     , width(w), height(h) {}
 
 Obstacle &Obstacle::render(SDL_Renderer *renderer)

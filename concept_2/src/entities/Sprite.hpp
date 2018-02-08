@@ -5,7 +5,6 @@ using namespace Graphics;
 
 class Sprite {
 private:
-    std::string name;
     bool falling = true;
 
 public:
@@ -15,7 +14,7 @@ public:
     float mass = this->width * this->height;
 
     Sprite() {}
-    Sprite(std::string, const Point &, float, float);
+    Sprite(const Point &, float, float);
     Sprite &render(SDL_Renderer *);
 
     void gravity(float);

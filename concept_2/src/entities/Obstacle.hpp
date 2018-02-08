@@ -5,7 +5,6 @@ using namespace Graphics;
 
 class Obstacle : public Sprite {
 private:
-    std::string name;
     bool falling = true;
 
 public:
@@ -15,7 +14,7 @@ public:
     float mass = this->width * this->height;
 
     Obstacle() : Sprite() {}
-    Obstacle(std::string, const Point &, float, float);
+    Obstacle(const Point &, float, float);
     Obstacle &render(SDL_Renderer *);
 
     void gravity(float);

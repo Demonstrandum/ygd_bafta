@@ -1,6 +1,6 @@
 #include "Player.hpp"
 
-Player::Player(std::string n, const Point &loc, float w, float h) : Sprite(n, loc, w, h)
+Player::Player(std::string n, const Point &loc, float w, float h) : Sprite(loc, w, h)
     , name(n), origin(loc)
     , width(w), height(h) {}
 
