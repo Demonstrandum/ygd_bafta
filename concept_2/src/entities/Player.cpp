@@ -26,3 +26,8 @@ void Player::move()
     this->origin.x += this->dir[0];
     this->origin.y += this->dir[1];
 }
+
+void Player::input(float xinput)
+{
+    this->origin.x += xinput;
+}

@@ -9,6 +9,8 @@ namespace Graphics {
         virtual void setup();
         virtual void draw();
         virtual void on_resize(SDL_Event event);
+        virtual void key_pressed();
+        virtual void key_released();
 
         void background(Colour);
 
@@ -21,5 +23,8 @@ namespace Graphics {
         SDL_Window *window;
         SDL_Renderer *renderer;
         SDL_Surface *base_surface;
+        SDL_Event event;
+        SDL_Keycode key_down;
+        SDL_Keycode key_up;
     };
 }

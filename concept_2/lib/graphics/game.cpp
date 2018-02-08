@@ -47,7 +47,6 @@ namespace Graphics {
             if (window == NULL) {
     			std::cout << "Window could not be created! SDL_Error: " << SDL_GetError() << std::endl;
     		} else {
-                SDL_Event event;
                 Timer timer;
                 bool running = true;
 
@@ -70,6 +69,14 @@ namespace Graphics {
                                         event.window.windowID, event.window.event);*/
                                 break;
                             }
+                        }
+                        if (event.type == SDL_KEYDOWN) {
+                            this->key_down = event.key.keysym.sym;
+                            this->key_pressed();
+                        }
+                        if (event.type == SDL_KEYUP) {
+                            this->key_up = event.key.keysym.sym;
+                            this->key_released();
                         }
                     }
 
