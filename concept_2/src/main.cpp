@@ -41,7 +41,6 @@ void Game::draw()
     stroke(Colour(255, 0, 255));
 
     for (Player &player : players) {
-        render(&player);
         player.gravity(player.mass);
         //player.dir[0] = 0.5;
         for (Player &other : players) {
@@ -56,6 +55,8 @@ void Game::draw()
         if(player.name == players[active].name) {
             player.input(players[active].inputdir[0]);
         }
+
+        render(&player);
     }
 
     for (Obstacle &wall : walls) {
