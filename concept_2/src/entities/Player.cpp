@@ -14,20 +14,23 @@ Player &Player::render(SDL_Renderer *renderer)
 
 void Player::gravity(float m)
 {
-    if (this->falling) {
-        this->dir[1] += m * 0.0001;
+    this->dir[1] += m * GRAVITY;
+}
+
+void Player::move(Side *collisions)
+{
+    this->gravity(this->mass);
+
+    if (includes(collisions, TOP) || includes(collisions, BOTTOM)) {
+        this->origin.y += this->dir[1];
     } else {
         this->dir[1] = 0;
+        this->origin.y -= this->dir[1] + GRAVITY * this->mass;
     }
-}
-
-void Player::move()
-{
     this->origin.x += this->dir[0];
-    this->origin.y += this->dir[1];
 }
 
-void Player::input(float xinput)
+void Player::reverse()
 {
-    this->origin.x += xinput;
+    this->origin.y -= this->dir[1] + GRAVITY * this->mass;
 }

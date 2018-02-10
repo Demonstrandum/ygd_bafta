@@ -1,9 +1,21 @@
+#pragma once
+
 #include <vector>
 #include <string>
 #include <chrono>
 #include <cmath>
 #include <algorithm>
 #include <iostream>
+
+template<class T>
+bool includes(T *array, T item)
+{
+    for (unsigned i = 0; i < sizeof(array) / sizeof(T); i++) {
+        if (array[i] == item)
+            return true;
+    }
+    return false;
+}
 
 #ifdef __linux__
     #include <SDL2/SDL.h>

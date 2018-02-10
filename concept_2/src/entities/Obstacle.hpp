@@ -4,12 +4,10 @@
 using namespace Graphics;
 
 class Obstacle : public Sprite {
-private:
-    bool falling = true;
-
 public:
     Point origin;
     std::vector<float> dir = {0, 0};
+    bool falling = true;
     float width, height;
     float mass = this->width * this->height;
 
@@ -19,4 +17,8 @@ public:
 
     void gravity(float);
     void move();
+
+    template<class Entity>
+    Side *collide(Entity *other)
+    { return collision(this, other); }
 };

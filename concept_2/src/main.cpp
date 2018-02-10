@@ -1,4 +1,6 @@
 #include <graphics/graphics.hpp>
+#include <iostream>
+
 #include "entities/Player.hpp"
 #include "entities/Obstacle.hpp"
 
@@ -41,23 +43,16 @@ void Game::draw()
     stroke(Colour(255, 0, 255));
 
     for (Player &player : players) {
-        player.gravity(player.mass);
-        //player.dir[0] = 0.5;
-        for (Player &other : players) {
-            if (other.name != player.name) {
-                player.collide(&other);
-            }
-        }
-        player.move();
+        Side *collisions;
         for (Obstacle &other : walls) {
-            player.collide(&other);
-        }
-        if(player.name == players[active].name) {
-            player.input(players[active].inputdir[0]);
+            collisions = player.collide(&other);
+            player.move(collisions);
         }
 
+        free(collisions);
         render(&player);
     }
+
 
     for (Obstacle &wall : walls) {
         render(&wall);
@@ -68,23 +63,20 @@ void Game::key_pressed()
 {
     switch (key_down) {
     case (SDLK_UP):
-        if (players[active].jumps > 0) {
-            players[active].dir[1] = -5;
-            players[active].jumps--;
-        }
         break;
 
     case (SDLK_LEFT):
-        players[active].inputdir[0] = -1;
+        players[active].dir[0] = -1;
         break;
 
     case (SDLK_RIGHT):
-        players[active].inputdir[0] = 1;
+        players[active].dir[0] = 1;
         break;
     }
 }
+
 void Game::key_released()
 {
-    players[active].inputdir[0] = 0;
-    players[active].inputdir[1] = 0;
+    players[active].dir[0] = 0;
+    players[active].dir[1] = 0;
 }
