@@ -17,28 +17,29 @@ Side *collision(Self *self, Entity *other)
     int index = 0;
 
     if (self->origin.y + self->height >= other->origin.y
-     && self->origin.x <= other->origin.x + other->width
-     && self->origin.x + self->width >= other->origin.x) {
-        index += 1;
+     && self->origin.x + 1 <= other->origin.x + other->width
+     && self->origin.x + self->width - 1 >= other->origin.x) {
         sides[index] = BOTTOM;
+        index += 1;
     }
     if (self->origin.y >= other->origin.y + other->height
-     && self->origin.x + self->width <= other->origin.x
-     && self->origin.x >= other->origin.x + other->width) {
-        index += 1;
+     && self->origin.x + self->width - 1 <= other->origin.x
+     && self->origin.x + 1 >= other->origin.x + other->width) {
         sides[index] = TOP;
+        index += 1;
     }
     if (self->origin.x + self->width >= other->origin.x
-     && self->origin.y <= other->origin.y + other->height
+     && self->origin.y + 1 <= other->origin.y + other->height
      && self->origin.y + self->height - 1 >= other->origin.y) {
-        index += 1;
         sides[index] = RIGHT;
-        std::cout << "sidehug";
-    }
-    if (self->origin.x >= other->origin.x + other->width) {
         index += 1;
-        sides[index] = LEFT;
     }
+    // if (self->origin.x >= other->origin.x + other->width
+    //  && self->origin.y - 1 <= other->origin.y + other->height
+    //  && self->origin.y + self->height - 1 >= other->origin.y) {
+    //     sides[index] = RIGHT;
+    //     index += 1;
+    // }
 
     return sides;
 }

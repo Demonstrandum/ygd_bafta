@@ -21,6 +21,10 @@ void Player::move(Side *collisions)
 {
     this->gravity(this->mass);
 
+    for (unsigned i = 0; i < 4; i++)
+        std::cout << collisions[i] << ", ";
+    std::cout << std::endl;
+
     if (includes(collisions, TOP) || includes(collisions, BOTTOM)) {
         this->dir[1] = 0;
         this->origin.y -= this->dir[1] + GRAVITY * this->mass;
@@ -30,9 +34,9 @@ void Player::move(Side *collisions)
 
     if (includes(collisions, RIGHT)) {
         this->origin.x -= this->dir[0];
-        std::cout << "goat farmer";
+        this->dir[0] = 0;
     }
-    else { // HOW DO I STOP HIM FROM GOING THROUGH SIDE WALL!
+    else {
         this->origin.x += this->dir[0];
     }
 
