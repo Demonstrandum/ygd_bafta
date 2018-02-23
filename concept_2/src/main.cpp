@@ -20,10 +20,10 @@ int active = 1;
 
 void Game::setup()
 {
-    std::vector<std::string> names = {"Tom", "Phenelope", "Sam", "Luke"};
+    std::vector<std::string> names = {"Tom", "Phenelope"};//, "Sam", "Luke"};
     int x = 10;
     for (std::string &name : names) {
-        players.push_back(Player(name, Point(x, 10), 30, 30));
+        players.push_back(Player(name, Point(x, 300), 30, 30));
         x += 50;
     }
 
@@ -43,7 +43,7 @@ void Game::draw()
     stroke(Colour(255, 0, 255));
 
     for (Player &player : players) {
-        Side *collisions;
+        Side *collisions = NULL;
         for (Obstacle &other : walls) {
             collisions = player.collide(&other);
             player.move(collisions);
@@ -78,5 +78,5 @@ void Game::key_pressed()
 void Game::key_released()
 {
     players[active].dir[0] = 0;
-    players[active].dir[1] = 0;
+    //players[active].dir[1] = 0;
 }

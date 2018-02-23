@@ -22,12 +22,20 @@ void Player::move(Side *collisions)
     this->gravity(this->mass);
 
     if (includes(collisions, TOP) || includes(collisions, BOTTOM)) {
-        this->origin.y += this->dir[1];
-    } else {
         this->dir[1] = 0;
         this->origin.y -= this->dir[1] + GRAVITY * this->mass;
+    } else {
+        this->origin.y += this->dir[1];
     }
-    this->origin.x += this->dir[0];
+
+    if (includes(collisions, RIGHT)) {
+        this->origin.x -= this->dir[0];
+        std::cout << "goat farmer";
+    }
+    else { // HOW DO I STOP HIM FROM GOING THROUGH SIDE WALL!
+        this->origin.x += this->dir[0];
+    }
+
 }
 
 void Player::reverse()

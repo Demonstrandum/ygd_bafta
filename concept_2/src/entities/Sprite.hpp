@@ -3,7 +3,7 @@
 #include <graphics/graphics.hpp>
 using namespace Graphics;
 
-const float GRAVITY = 0.00001;
+const float GRAVITY = 0.0000001;
 
 enum Side {
     TOP=1,  BOTTOM=3,
@@ -16,17 +16,24 @@ Side *collision(Self *self, Entity *other)
     Side *sides = (Side *)calloc(4, sizeof(Side));
     int index = 0;
 
-    if (self->origin.y + self->height <= other->origin.y) {
+    if (self->origin.y + self->height >= other->origin.y
+     && self->origin.x <= other->origin.x + other->width
+     && self->origin.x + self->width >= other->origin.x) {
         index += 1;
         sides[index] = BOTTOM;
     }
-    if (self->origin.y >= other->origin.y + other->height) {
+    if (self->origin.y >= other->origin.y + other->height
+     && self->origin.x + self->width <= other->origin.x
+     && self->origin.x >= other->origin.x + other->width) {
         index += 1;
         sides[index] = TOP;
     }
-    if (self->origin.x + self->width  <= other->origin.x) {
+    if (self->origin.x + self->width >= other->origin.x
+     && self->origin.y <= other->origin.y + other->height
+     && self->origin.y + self->height - 1 >= other->origin.y) {
         index += 1;
         sides[index] = RIGHT;
+        std::cout << "sidehug";
     }
     if (self->origin.x >= other->origin.x + other->width) {
         index += 1;
